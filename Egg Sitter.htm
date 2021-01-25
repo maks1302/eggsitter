@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<script src="Egg%20Sitter_files/jquery.js"></script>
+
+    <script>
+    function set_validator_errors(){
+        orderValidator.errorTitle = 'Por favor corrige los siguientes errores'; 
+
+        orderValidator.errorNameField = 'Listo'; 
+        orderValidator.errorNameMess = 'Introduzca su nombre'; 
+        
+        orderValidator.errorPhoneField = 'Nombre'; 
+        orderValidator.errorPhoneMess = 'Ingrese el número de teléfono correcto'; 
+        
+        orderValidator.errorAddress = 'Ingrese la dirección correcta'; 
+        orderValidator.errorRequired = 'campo requerido'; 
+        orderValidator.errorMaxLength = 'carácter máximo válido {1}'; 
+        orderValidator.errorMinLength = 'carácter mínimo válido {1}'; 
+        orderValidator.errorEmailField = 'E-mail';
+        orderValidator.errorEmail = 'Correo electrónico no válido especificado';
+        }
+    </script>
+    
+<script>
+
+
+window.app = {
+    timestamp: parseInt((new Date()).getTime() / 1000),
+    jq: jQuery,
+    formAction: window.location.href,
+    leadToken: '600ea791b9e8d4.14536411',
+    offers: {"20840":{"price":"1990","link":"","id":20840,"prepaid_info_html":"","discount":"","country":{"name":"\u0420\u043e\u0441\u0441\u0438\u044f","code":"RU"},"delivery_price":"","price2":"3980","product_sku":"","currency":{"name":"\u0440\u0443\u0431","code":"RUB"}},"21706":{"price":"189","link":"","id":21706,"prepaid_info_html":"","discount":"","country":{"name":"\u0420\u0443\u043c\u044b\u043d\u0438\u044f","code":"RO"},"delivery_price":"","price2":"378","product_sku":"","currency":{"name":"RON","code":"RON"}}},
+    currentOffer: {"price":"189","link":"","id":21706,"prepaid_info_html":"","discount":"","country":{"name":"\u0420\u0443\u043c\u044b\u043d\u0438\u044f","code":"RO"},"delivery_price":"","price2":"378","product_sku":"","currency":{"name":"RON","code":"RON"}},
+    allowedCountries: ["RU","RO"],
+    _setOfferId: false,
+    
+    setOffer: function (offerId) {
+        if (offerId == this._setOfferId) {
+            return ;
+        }
+        this._setOfferId = offerId;
+        if (offerId) {
+            var offer = app.offers[offerId];
+            var previousOffer = app.currentOffer;
+            app.currentOffer = offer;
+            var event = this.jq.Event("offerchange");
+            event.previousOffer = previousOffer;
+            event.currentOffer = app.currentOffer;
+            this.jq(document).trigger(event);
+            this.updatePage(offer);
+        } else {
+            $('input[name=country]').val('');
+        }
+    },
+    
+    updatePage: function(offer) {
+        $('x-newprice').html(offer.price);
+        $('x-oldprice').html(offer.price2);
+        $('x-currency').html(offer.currency.name);
+        $('input[name=offer], select[name=offer]').val(offer.id);
+        $('input[name=country]').val(offer.country.code);
+    },
+
+    blockForm: function() {
+        // Блокируем кнопки при отправке формы
+        $('input[type=submit]', $(this)).prop( 'disabled', true ).attr( 'disabled', true );
+        $('button', $(this)).prop( 'disabled', true ).attr( 'disabled', true );
+        app.incompleteOrder.lock = true;
+        clearTimeout(app.incompleteOrder.timer);
+    },
+
+    unblockForm: function() {
+        $('input[type=submit]', $(this)).prop( 'disabled', false ).attr( 'disabled', false );
+        $('button[type=submit]', $(this)).prop( 'disabled', false ).attr( 'disabled', false );
+        app.incompleteOrder.lock = false;
+        clearTimeout(app.incompleteOrder.timer);
+    }
+
+};
+
+
+</script><script src="Egg%20Sitter_files/form.js"></script>
+<script src="Egg%20Sitter_files/form_002.js"></script>
+<script src="Egg%20Sitter_files/main2.js"></script>
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="icon" href="http://eggsitter.xcartpro.com/r1/favicon.ico">
+    <link rel="stylesheet" href="Egg%20Sitter_files/style.css">
+    <link rel="stylesheet" href="Egg%20Sitter_files/stylesheet.css">
+    <title>Egg Sitter</title>
+
+
+    <meta property="og:locale" content="">
+    <meta property="og:title" content="EGG SITTER">
+    <meta property="og:content" content="">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="img/b5-product.png">
+    <script src="Egg%20Sitter_files/jquery_002.js"></script>
+</head>
+
+<body>
+    <div class="main">
+        <div class="block1">
+            <img src="Egg%20Sitter_files/block1.png" alt="" class="bg">
+            <img src="Egg%20Sitter_files/block2.png" alt="" class="bg1">
+            <div class="wrapper">
+                <img class="girl" src="Egg%20Sitter_files/girl.png" alt="">
+                <div class="content">
+                    <div class="title">
+                        Ya no hay <br>
+                        <span class="big">dolor</span><span class="small">, me deshice de él…</span>
+                    </div>
+                    <div class="content__text">
+                        La almohada ortopédica para <span>sentarse cómodamente</span>
+                    </div>
+                    <div class="order-form">
+                        <div class="product">
+                            <div class="name-prod">
+                                <span>EGG</span> <br>
+                                Sitter
+                            </div>
+                            <img src="Egg%20Sitter_files/product.png" alt="">
+                        </div>
+                        <form action="http://eggsitter.xcartpro.com/r1/?lnk=8276&amp;off=GdMwU0kG&amp;m=101db33a0156" class="orderForm" method="post" autocomplete="on"><input type="hidden" name="code_confirm" value=""><input type="hidden" name="visit_duration2" value=""><input type="hidden" name="visit_duration1" value="12"><input type="hidden" name="timezone_int" value="2"><input type="hidden" name="local_time" value=""><input type="hidden" name="lead_token" value="600ea791b9e8d4.14536411"><input type="hidden" name="country" value="RO">
+                                    <input name="csrf_token" type="hidden" value="d5f9ebe343843048df72668b38ef134b:1611573139">
+    <select name="offer" class="form-control country_chang" style="display: none;">
+        <option data-country-code="RO" selected="selected" value="21706">
+            Румыния        </option>
+    </select>
+
+       
+                            <input type="text" name="name" class="form_group" placeholder="Su nombre" required="" autocomplete="name">
+                            <input type="text" name="phone" class="form_group" placeholder="+34 912345678 " required="" autocomplete="tel">
+                            <button class="form_btn" type="submit">Hacer el pedido</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="block2">
+            <img src="Egg%20Sitter_files/b2-bg-1.png" alt="" class="bg1">
+            <img src="Egg%20Sitter_files/b2-bg-2.png" alt="" class="bg2">
+            <img src="Egg%20Sitter_files/b2-bg-1.png" alt="" class="bg3">
+            <div class="wrapper">
+                <div class="content-part">
+                    <div class="left">
+                        <h3>Cualquier asiento se hace cómodo</h3>
+                        <p>
+                           Dentro de la almohada hay un relleno de gel 
+único que se acomoda perfectamente bajo su cuerpo y garantiza una 
+distribución uniforme de la presión 
+                        </p>
+                    </div>
+                    <div class="right">
+                        <img src="Egg%20Sitter_files/b2-1.png" alt="">
+                    </div>
+                </div>
+                <div class="content-part">
+                    <div class="desktop">
+                        <div class="left">
+                            <img src="Egg%20Sitter_files/b2-2.png" alt="">
+                        </div>
+                        <div class="right">
+                            <h3>Se apoyan los músculos de la espalda</h3>
+                            <p>
+                               Usted incluso no sentirá que está sentado
+ porque los músculos de la espalda están relajados debido a la 
+eliminación de la presión en los puntos de apoyo.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mobile">
+                        <div class="left">
+                            <h3>Se apoyan los músculos de la espalda</h3>
+                            <p>
+                               Usted incluso no sentirá que está sentado
+ porque los músculos de la espalda están relajados debido a la 
+eliminación de la presión en los puntos de apoyo.
+                            </p>
+                        </div>
+                        <div class="right">
+                            <img src="Egg%20Sitter_files/b2-2.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="content-part">
+                    <div class="left">
+                        <h3>No hay contacto doloroso con  <br> los asientos duros</h3>
+                        <p>
+                            Su diseño celular de la almohada elimina totalmente la presión sobre el coxis y la zona anorrectal.
+                        </p>
+                    </div>
+                    <div class="right">
+                        <img src="Egg%20Sitter_files/b2-3.png" alt="">
+                    </div>
+                </div>
+                <div class="content-part">
+                    <div class="desktop">
+                        <div class="left">
+                            <img src="Egg%20Sitter_files/b2-4.png" alt="">
+                        </div>
+                        <div class="right">
+                            <h3>Restituye la circulación sanguínea<br> en los órganos de la pelvis </h3>
+                            <p>
+                                Los vasos y nervios en la región del 
+tubérculo ciático ya no están comprimidos. Desaparece el riesgo del 
+surgimiento de edemas, congestiones, hemorroides y en los hombres de la 
+prostatitis. 
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mobile">
+                        <div class="left">
+                            <h3>Restituye la circulación sanguínea<br> en los órganos de la pelvis </h3>
+                            <p>
+                                Los vasos y nervios en la región del 
+tubérculo ciático ya no están comprimidos. Desaparece el riesgo del 
+surgimiento de edemas, congestiones, hemorroides y en los hombres de la 
+prostatitis. 
+                            </p>
+                        </div>
+                        <div class="right">
+                            <img src="Egg%20Sitter_files/b2-4.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="video-part">
+                    <h3>Egg Sitter en acción</h3>
+                    <div class="video">
+                        <!-- <video src="../../../../www.youtube.com/watch@v=hoglHr8Qz14" controls="controls" width="100%" height="500"  />     --> 
+                        <iframe src="Egg%20Sitter_files/hoglHr8Qz14.htm" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" width="100%" height="500" frameborder="0"></iframe>                                                                                             
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="block3">
+            <div class="wrapper">
+                <p>¿Quiere deshacerse del dolor y prevenir </p>
+                <h3>el desarrollo de enfermedades peligrosas?</h3>
+                <div class="content">
+                    <div class="product">
+                        <img src="Egg%20Sitter_files/b3-prod.png" alt="">
+                        <div class="price">
+                            <div class="old_price"><x-oldprice>378</x-oldprice> <x-currency>RON</x-currency> </div>
+                            <div class="new_price"><x-newprice>189</x-newprice> <x-currency>RON</x-currency> </div>
+                        </div>
+                    </div>
+                    <div class="order-block">
+                        <p class="top-text">Pida la almohada</p>
+                        <div class="prod-name">
+                            EGG <br> <span>SITTER</span>
+                        </div>
+                        <p class="bottom-text">Y se convencerá  <br> de su efectividad</p>
+                        <button class="scroll_to_form">Pida la almohada</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="block4">
+            <div class="wrapper">
+                <div class="prod-name">
+                    EGG <br> <span>SITTER</span>
+                </div>
+                <p>La necesitan todos, <br>
+                    <span> pero en primer</span>
+                </p>
+                <div class="content">
+                    <div class="left">
+                        <div class="box">
+                            <h4>Para los conductores</h4>
+                            <img src="Egg%20Sitter_files/b4-1.png" alt="">
+                            <p>
+                                Estoy al volante por 12 horas cada día. 
+Hacia la tarde los pies se hinchan, la espalda ya no la siento 
+completamente. Por lo visto la hemorroide está cerca. Los masajes con 
+ungüentos no alivian. En la Egg Sitter te sientes como en ingravidez. No
+ aprieta nada, comodidad total. El dolor se fue ya en 3-4 días.
+                            </p>
+                        </div>
+                        <div class="box">
+                            <h4>Para los escolares</h4>
+                            <img src="Egg%20Sitter_files/b4-2.png" alt="">
+                            <p>
+                               La madre de cualquier escolar sabe qué es
+ la escoliosis. Nosotros ya nos encontramos con este problema en el 
+segundo grado. ¡Le recetaron gimnasia y faja, pero no ayudó! Si no fuera
+ por Egg Sitter, me da miedo pensar cómo terminaría. ¡Recomiendo esta 
+almohada todos!
+                            </p>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="box">
+                            <h4>Para los empleados de oficina </h4>
+                            <img src="Egg%20Sitter_files/b4-3.png" alt="">
+                            <p>
+                               A veces no dejo la computadora 5-6 horas.
+ ¡Después el dolor de espalda es insoportable! Lo peor es que debido a 
+que los vasos sanguíneos se encuentran apretados, existe el riesgo de 
+desarrollar infertilidad. Y yo no podía permitir esto. Mi aconsejó Egg 
+Sitter el fisioterapeuta. ¡Es asombroso, pero el dolor en la espalda y 
+los pies desaparecieron de pronto! No noto la presión y el médico dijo 
+que ya no hay congestión en la pelvis 
+                            </p>
+                        </div>
+                        <div class="box">
+                            <h4>Para las embarazadas </h4>
+                            <img src="Egg%20Sitter_files/b4-4.png" alt="">
+                            <p>
+                               Seguramente solo las mujeres embarazadas 
+me podrán comprender. En los últimos meses la presión sobre la columna 
+es tal que dan ganas de llorar. Nada me ayudaba. Si no era Egg Sitter 
+probablemente hubiera enloquecido. A propósito, la doctora dijo que 
+precisamente esta almohada hace que los partos, como resultado, sean 
+menos dolorosos. 
+                            </p>
+                        </div>
+                        <div class="box">
+                            <h4>Para los deportistas </h4>
+                            <img src="Egg%20Sitter_files/b4-5.png" alt="">
+                            <p>
+                                Si haces deporte las lesiones son 
+inevitables, especialmente en los saltos y la carrera. Practique 
+atletismo desde niño y por eso las lesiones en la espalda se fueron 
+acumulando mucho. Los médicos pueden lidiar con ello, pero nada ayuda 
+con el dolor de espalda. ¡Después de los entrenamientos no podía 
+sentarme ni una hora, todo me dolía, hasta tenía calambres en las 
+piernas! Solo Egg Sitter me ayudó a relajar los músculos después de las 
+lesiones. ¡Gracias a quienes la crearon! 
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="block5">
+            <div class="wrapper">
+                <h2>¿Qué más es capaz de hacer Egg Sitter?</h2>
+                <h4>Simplemente utilizando <br> la almohada cada día, usted:</h4>
+                <div class="content">
+                    <ul>
+                        <li>Se restablece rápidamente después de una operación y lesión en los órganos de la pelvis.</li>
+                        <li>Corrige su postura</li>
+                        <li>Deshágase de los síntomas de las hemorroides</li>
+                    </ul>
+                    <div class="product">
+                        <img src="Egg%20Sitter_files/b5-product.png" alt="">
+                    </div>
+                    <ul>
+                        <li>Olvídese de la incomodidad y de los espasmos de los músculos de la espalda </li>
+                        <li>Revierta el desarrollo de las enfermedades de la pelvis, osteocondrosis, radiculitis, hernias de disco.</li>
+                        <li>No tendrá encuentros  con la prostatitis </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="block6">
+            <div class="wrapper">
+                <div class="part">
+                    <h2>
+                        <span>¡Basta</span> de sufrir!
+                    </h2>
+                    <img src="Egg%20Sitter_files/b6-1.png" alt="">
+                </div>
+                <div class="part">
+                    <div class="price">
+                        <div class="new_price"><x-newprice>189</x-newprice> <x-currency>RON</x-currency> </div>
+                        <div class="old_price"><x-oldprice>378</x-oldprice> <x-currency>RON</x-currency> </div>
+                    </div>
+                    <img src="Egg%20Sitter_files/b3-prod.png" alt="">
+                </div>
+                <div class="part">
+                    <form action="http://eggsitter.xcartpro.com/r1/?lnk=8276&amp;off=GdMwU0kG&amp;m=101db33a0156" method="post" class="orderForm" autocomplete="on"><input type="hidden" name="code_confirm" value=""><input type="hidden" name="visit_duration2" value=""><input type="hidden" name="visit_duration1" value="12"><input type="hidden" name="timezone_int" value="2"><input type="hidden" name="local_time" value=""><input type="hidden" name="lead_token" value="600ea791b9e8d4.14536411"><input type="hidden" name="country" value="RO">
+                        <p>Pida la almohada</p>
+                        <div class="prod-name">
+                            EGG <br> <span>SITTER</span>
+                        </div>
+                        <p>y experimente la sensación de un verdadero confort </p>
+                            <input name="csrf_token" type="hidden" value="d5f9ebe343843048df72668b38ef134b:1611573139">
+    <select name="offer" class="form-control country_chang" style="display: none;">
+        <option data-country-code="RO" selected="selected" value="21706">
+            Румыния        </option>
+    </select>
+
+       
+                        <input type="text" name="name" class="form_group" placeholder="Su nombre" required="" autocomplete="name">
+                        <input type="text" name="phone" class="form_group" placeholder="+34 912345678" required="" autocomplete="tel">
+                        <button class="form_btn" type="submit">Quiero una espalda sana</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="Egg%20Sitter_files/main.js"></script>
+
+   
+<center style="margin: 30px auto"><p>OOO "OSTROV PRODAZH" OGRN: 1197746695530 VAT: 7708365555</p>
+<p>129090, Moscow, pereulok Zhivarev, house 8, stroenie 3, flat 16 email: ostrov.prodazh@mail.com Skype: ostrov.prodazh@mail.com</p> 
+
+
+    
+            <p class="conf-link doclinks">
+        <a class="nav-link" href="" onclick="window.open('/policy_en.php'); return false;">Privacy Policy</a>
+          |
+        <a class="nav-link" href="" onclick="window.open('/terms_en.php'); return false;">Terms &amp; Conditions</a>
+      </p>
+      
+    
+</center>
+
+</body></html>
